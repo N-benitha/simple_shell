@@ -17,6 +17,12 @@
 #include <stddef.h>
 
 
+#define BUFSIZE 1024
+#define TOK_BUFSIZE 128
+#define TOK_DELIM " \t\r\n\a"
+
+
+
 extern char **environ;
 
 typedef struct arguments
@@ -41,7 +47,8 @@ typedef struct data
 	char *input;
 	char **args;
 	int status;
-	char **_envi;
+	int counter
+	char **_environ;
 	
 } data_shell;
 
@@ -73,5 +80,6 @@ char *_copyinfo(char *name, char *value);
 void _setsenv(char *name, char *value, data_shell *dat);
 int set_env(data_shell *dat);
 int _delsetenv(data_shell *dat);
+char *strcat_cd(data_shell *dat, char *msg, char *error, char *ver_str);
 
 #endif
