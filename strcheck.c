@@ -38,7 +38,7 @@ char *_strdup(const char *s)
 	char *new;
 	size_t len;
 
-	len = strlen(s);
+	len = _strlen(s);
 	new = malloc(sizeof(char) * (len + 1));
 	if (new == NULL)
 		return (NULL);
@@ -46,12 +46,12 @@ char *_strdup(const char *s)
 	return (new);
 }
 /**
- * *strcpy - This Copies the str
+ * _strcpy - This Copies the str
  * @dest: Type char pointer the dest of the copied str
  * @src: Type char pointer the source of str
  * Return: the dest.
  */
-char *strcpy(char *dest, char *src)
+char *_strcpy(char *dest, char *src)
 {
 
 	size_t a;
@@ -102,13 +102,13 @@ int isdigit(const char *s)
 	return (1);
 }
 /**
- * strlen - A code that Returns the lenght of a string.
+ * _strlen - A code that Returns the lenght of a string.
  * the lenght of a string.
  * @s: Type char pointer
  * Return: Always 0.
  */
 
-int strlen(const char *s)
+int _strlen(const char *s)
 {
 	int len;
 

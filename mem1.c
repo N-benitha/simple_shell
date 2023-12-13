@@ -1,3 +1,4 @@
+#include "shell.h"
 /**
  * mem_copy - This code copies information between void pointers.
  * 

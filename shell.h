@@ -13,6 +13,9 @@
 #include <limits.h>
 #include <dirent.h>
 #include <errno.h>
+#include <ctype.h>
+#include <stddef.h>
+
 
 extern char **environ;
 
@@ -38,7 +41,7 @@ typedef struct data
 	char *input;
 	char **args;
 	int status;
-	char **_environ;
+	char **_envi;
 	
 } data_shell;
 
@@ -55,10 +58,10 @@ char *_strtok(char str[], const char *delm);
 int get_error(data_shell *dat, int eval);
 char *_strcat(char *dest, const char *src);
 char *_strdup(const char *s);
-char *strcpy(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
 int str_cmp(char *s1, char *s2);
-int isdigit(const char *s);
-int strlen(const char *s);
+int _isdigit(const char *s);
+int _strlen(const char *s);
 int strtoi(char *s);
 void mem_copy(void *newptr, const void *ptr, unsigned int size);
 char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);

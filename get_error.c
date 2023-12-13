@@ -35,9 +35,10 @@ error = error_get_cd(dat);
 
 if (error)
 {
-write(STDERR_FILENO, error, strlen(error));
+write(STDERR_FILENO, error, _strlen(error));
 free(error);
 }
 
-dat->status = eval;
+datash->status = eval;
 return eval;
+}
