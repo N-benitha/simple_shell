@@ -52,6 +52,13 @@ typedef struct data
 	int cmd_buf_type;
 } data_shell;
 
+typedef struct liststr
+{
+	int num;
+	char *str;
+	struct liststr *next;
+} list_t;
+
 #define ARGS_INIT \
 {NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, 0}
 
@@ -93,6 +100,7 @@ char *error_not_found(data_shell *dat);
 char *error_exit_shell(data_shell *dat);
 char *aux_itoa(int n);
 char *convert_number(long int num, int base, int flags);
+list_t *node_starts_with(list_t *node, char *prefix, char c);
 char *starts_with(const char *a, const char *b);
 int is_chain(data_shell *d, char *buf, size_t *p);
 void check_chain(data_shell *d, char *buf, size_t *p, size_t i, size_t len);
