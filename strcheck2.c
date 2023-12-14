@@ -79,17 +79,23 @@ return (NULL);
 return (str_start);
 }
 
+/**
+ * aux_itoa - converts integer to string
+ * @n: integer
+ *
+ * Return: string.
+ */
 char *aux_itoa(int n)
 {
 unsigned int n1;
-int lenght = get_len(n);
+int length = get_len(n);
 char *buffer;
 
-buffer = malloc(sizeof(char) * (lenght + 1));
+buffer = malloc(sizeof(char) * (length + 1));
 if (buffer == 0)
 return (NULL);
 
-*(buffer + lenght) = '\0';
+*(buffer + length) = '\0';
 
 if (n < 0)
 {
@@ -101,14 +107,14 @@ else
 n1 = n;
 }
 
-lenght--;
-do {
-*(buffer + lenght) = (n1 % 10) + '0';
+length--;
+do
+{
+*(buffer + length) = (n1 % 10) + '0';
 n1 = n1 / 10;
-lenght--;
-}
-while (n1 > 0)
-		;
+length--;
+} while (n1 > 0);
+
 return (buffer);
 }
 
@@ -122,11 +128,11 @@ return (buffer);
 int get_len(int n)
 {
 unsigned int n1;
-int lenght = 1;
+int length = 1;
 
 if (n < 0)
 {
-lenght++;
+length++;
 n1 = n * -1;
 }
 else
@@ -135,9 +141,9 @@ n1 = n;
 }
 while (n1 > 9)
 {
-lenght++;
+length++;
 n1 = n1 / 10;
 }
 
-return (lenght);
+return (length);
 }

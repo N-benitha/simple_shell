@@ -63,7 +63,7 @@ void fork_exec(char **arr)
 		{
 			a->status = WEXITSTATUS(a->status);
 			if (a->status == 126)
-				get_error(a, PERMISSION_DENIED_ERROR_CODE);
+				get_error(a, 126);
 		}
 	}
 

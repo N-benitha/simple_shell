@@ -57,8 +57,7 @@ typedef struct liststr
 	struct liststr *next;
 } list_t;
 
-#define ARGS_INIT \
-{NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, 0}
+extern const data_shell DATA_SHELL_INIT;
 
 extern char **environ;
 
@@ -87,7 +86,7 @@ int env_comp(const char *invro, const char *name);
 char *_env_get(const char *name, char **_environ);
 int _env(data_shell *dat);
 char *_copyinfo(char *name, char *value);
-void _setsenv(char *name, char *value, data_shell *dat);
+int _setsenv(data_shell *dat);
 int set_env(data_shell *dat);
 int _delsetenv(data_shell *dat);
 char *strcat_cd(data_shell *dat, char *msg, char *error, char *ver_str);

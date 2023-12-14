@@ -29,24 +29,32 @@ return (new);
  * @name: name of the environment variable
  * @value: value of the environment variable
  * @dat: data structure (envi)
- * Return: no return
+ * Return: 0.
  */
 
-void _setsenv(char *name, char *value, data_shell *dat)
+int _setsenv(data_shell *dat)
 {
 int i;
 char *var_env, *name_env;
+
+if (dat->args[1] == NULL || dat->args[2] == NULL)
+{
+	return (1);
+}
+char *name = dat->args[1];
+char *value = dat->args[2];
 
 for (i = 0; dat->_environ[i]; i++)
 {
 var_env = _strdup(dat->_environ[i]);
 name_env = _strtok(var_env, "=");
+
 if (str_cmp(name_env, name) == 0)
 {
 free(dat->_environ[i]);
 dat->_environ[i] = _copyinfo(name_env, value);
 free(var_env);
-return;
+return (0);
 }
 free(var_env);
 }
@@ -54,6 +62,7 @@ free(var_env);
 dat->_environ = _reallocdp(dat->_environ, i, sizeof(char *) * (i + 2));
 dat->_environ[i] = _copyinfo(name, value);
 dat->_environ[i + 1] = NULL;
+return (0);
 }
 
 /**
@@ -71,7 +80,7 @@ get_error(dat, -1);
 return (1);
 }
 
-_setsenv(dat->args[1], dat->args[2], dat);
+_setsenv(dat);
 
 return (1);
 }
