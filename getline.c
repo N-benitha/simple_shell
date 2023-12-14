@@ -1,11 +1,12 @@
 #include "shell.h"
 /**
  * _getline - gets reads an entire line from the stream
- * @a: pointer to structure args
+ * @line: input
+ * @len: length
  *
  * Return: 0 on Success, -1 on error
  */
-int _getline(args *a)
+int _getline(data_shell *a)
 {
 	char *line = NULL;
 	size_t len = 0;
@@ -15,7 +16,7 @@ int _getline(args *a)
 		fprintf(stderr, "Error writing to the line\n");
 		return (-1);
 	}
-	a->line = line;
+	a->input = line;
 	a->tokens = NULL;
 	a->len = len;
 	return (0);

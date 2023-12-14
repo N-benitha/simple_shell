@@ -9,8 +9,8 @@
  */
 int main(int ac, char **av)
 {
-	args a[] = {ARGS_INIT};
+	data_shell my_data = ARGS_INIT;
 
-	prompt();
+	prompt(&my_data);
 	return (0);
 }

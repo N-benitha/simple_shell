@@ -5,7 +5,7 @@
  *
  * Return: address of pointer to character
  */
-char **parser(args *a)
+char **parser(data_shell *a)
 {
 	char *token;
 	char **arr;
@@ -18,7 +18,7 @@ char **parser(args *a)
 		exit(EXIT_FAILURE);
 	}
 
-	token = strtok(a->line, " \t\n");
+	token = strtok(a->input, " \t\n");
 	while (token)
 	{
 		arr[i] = strdup(token);
@@ -38,8 +38,8 @@ char **parser(args *a)
  */
 void fork_exec(char **arr)
 {
+	data_shell *a;
 	pid_t child_pid;
-	int status = 0;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -50,11 +50,21 @@ void fork_exec(char **arr)
 	if (child_pid == 0)
 	{
 		if (execve(arr[0], arr, NULL) == -1)
-			perror("Error");
+		{
+			if (errno == EACCES)
+				exit(126);
+			exit(1);
+		}
 	}
 	else
 	{
-		wait(&status);
+		wait(&(a->status));
+		if (WIFEXITED(a->status))
+		{
+			a->status = WEXITSTATUS(a->status);
+			if (a->status == 126)
+				get_error(a, PERMISSION_DENIED_ERROR_CODE);
+		}
 	}
 
 }

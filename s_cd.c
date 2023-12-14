@@ -5,7 +5,7 @@
  *
  * Return: 1.
  */
-int sh_cd(args *a)
+int sh_cd(data_shell *a)
 {
 	if (a->len < 2 || a->tokens[1] == NULL)
 	{
@@ -14,7 +14,7 @@ int sh_cd(args *a)
 	else
 	{
 		if (chdir(a->tokens[1]) != 0)
-			perror("hsh");
+			error_get_cd(&a);
 	}
 	return (1);
 }
