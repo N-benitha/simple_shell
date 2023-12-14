@@ -48,13 +48,13 @@ typedef struct data
 } data_shell;
 
 void prompt(void);
-int _getline(args *a);
+int _getline(data_shell *a);
 void fork_exec(char **arr);
-char **parser(args *a);
-int sh_exit(args *a);
-int sh_help(args *a);
-int sh_cd(args *a);
-int _getenv(args *a);
+char **parser(data_shell *a);
+int sh_exit(data_shell *a);
+int sh_help(data_shell *a);
+int sh_cd(data_shell *a);
+int _getenv(data_shell *a);
 int exit_shell(data_shell *dat);
 char *_strtok(char str[], const char *delm);
 int get_error(data_shell *dat, int eval);

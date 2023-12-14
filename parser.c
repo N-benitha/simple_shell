@@ -5,7 +5,7 @@
  *
  * Return: address of pointer to character
  */
-char **parser(args *a)
+char **parser(data_shell *a)
 {
 	char *token;
 	char **arr;
@@ -18,7 +18,7 @@ char **parser(args *a)
 		exit(EXIT_FAILURE);
 	}
 
-	token = strtok(a->line, " \t\n");
+	token = strtok(a->input, " \t\n");
 	while (token)
 	{
 		arr[i] = strdup(token);

@@ -5,7 +5,7 @@
  *
  * Return: 1.
  */
-int sh_help(args *a)
+int sh_help(data_shell *a)
 {
 	printf("Use man command to get information about other commands.\n");
 	printf("more information to be added later.\n");
