@@ -39,6 +39,6 @@ write(STDERR_FILENO, error, _strlen(error));
 free(error);
 }
 
-datash->status = eval;
+dat->status = eval;
 return eval;
 }

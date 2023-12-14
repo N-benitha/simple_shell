@@ -74,12 +74,13 @@ void mem_copy(void *newptr, const void *ptr, unsigned int size);
 char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int env_comp(const char *invro, const char *name);
-char *_env_get(const char *name, char **_envi);
+char *_env_get(const char *name, char **_environ);
 int _env(data_shell *dat);
 char *_copyinfo(char *name, char *value);
 void _setsenv(char *name, char *value, data_shell *dat);
 int set_env(data_shell *dat);
 int _delsetenv(data_shell *dat);
 char *strcat_cd(data_shell *dat, char *msg, char *error, char *ver_str);
+int get_len(int n);
 
 #endif
