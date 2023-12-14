@@ -9,17 +9,17 @@
 
 int env_comp(const char *invro, const char *name)
 {
-	int i;
+int i;
 
-	for (i = 0; invro[i] != '='; i++)
-	{
-		if (invro[i] != name[i])
-		{
-			return (0);
-		}
-	}
+for (i = 0; invro[i] != '='; i++)
+{
+if (invro[i] != name[i])
+{
+return (0);
+}
+}
 
-	return (i + 1);
+return (i + 1);
 }
 
 /**
@@ -30,28 +30,28 @@ int env_comp(const char *invro, const char *name)
  * Return: value of the environment variable if is found.
  */
 
-char *_env_get(const char *name, char **_envi)
+char *_env_get(const char *name, char **_environ)
 {
-	char *ptr_env;
-	int i, mov;
+char *ptr_env;
+int i, mov;
 
-	/* Initialize ptr_env value */
-	ptr_env = NULL;
-	mov = 0;
-	/* Compare all environment variables */
-	/* envi is declared in the header file */
-	for (i = 0; _envi[i]; i++)
-	{
-		/* If name and environment are equal */
-		mov = env_comp(_envi[i], name);
-		if (mov)
-		{
-			ptr_env = _envi[i];
-			break;
-		}
-	}
+/* Initialize ptr_env value */
+ptr_env = NULL;
+mov = 0;
+/* Compare all environment variables */
+/* envi is declared in the header file */
+for (i = 0; _environ[i]; i++)
+{
+/* If name and environment are equal */
+mov = env_comp(_environ[i], name);
+if (mov)
+{
+ptr_env = _environ[i];
+break;
+}
+}
 
-	return (ptr_env + mov);
+return (ptr_env + mov);
 }
 
 /**
@@ -62,18 +62,18 @@ char *_env_get(const char *name, char **_envi)
  */
 int _env(data_shell *dat)
 {
-	int i, j;
+int i, j;
 
-	for (i = 0; dat->_envi[i]; i++)
-	{
+for (i = 0; dat->_environ[i]; i++)
+{
 
-		for (j = 0; dat->_envi[i][j]; j++)
-			;
+for (j = 0; dat->_environ[i][j]; j++)
+;
 
-		write(STDOUT_FILENO, dat->_envi[i], j);
-		write(STDOUT_FILENO, "\n", 1);
-	}
-	dat->status = 0;
+write(STDOUT_FILENO, dat->_environ[i], j);
+write(STDOUT_FILENO, "\n", 1);
+}
+dat->status = 0;
 
-	return (1);
+return (1);
 }

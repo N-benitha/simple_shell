@@ -86,11 +86,11 @@ int str_cmp(char *s1, char *s2)
 }
 
 /**
- * isdigit - This used to check if a string is a digit
+ * _isdigit - This used to check if a string is a digit
  * @s: input string
  * Return: 1 if string is a number. 0 in other case.
  */
-int isdigit(const char *s)
+int _isdigit(const char *s)
 {
 	unsigned int i;
 
