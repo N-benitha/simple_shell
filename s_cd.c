@@ -5,7 +5,7 @@
  *
  * Return: 1.
  */
-int sh_cd(args *a)
+int sh_cd(data_shell *a)
 {
 	if (a->len < 2 || a->tokens[1] == NULL)
 	{

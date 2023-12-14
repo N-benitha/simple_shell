@@ -6,9 +6,11 @@
  */
 void prompt(void)
 {
-	args a = ARGS_INIT;
+	data_shell a = ARGS_INIT;
 	int status, i;
-	blt_in b[] = {{"cd", sh_cd}, {"help", sh_help}, {"exit", sh_exit}, {"env", _getenv}};
+	blt_in b[] = {{"cd", sh_cd}, {"help", sh_help},
+		{"exit", exit_shell}, {"setenv", _setsenv},
+		{"unsetenv", _delsetenv}};
 
 	while (1)
 	{
