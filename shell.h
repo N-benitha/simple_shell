@@ -22,15 +22,8 @@
 #define TOK_DELIM " \t\r\n\a"
 
 
-
 extern char **environ;
 
-typedef struct arguments
-{
-	char *line;
-	char **tokens;
-	size_t len;
-}args;
 
 #define ARGS_INIT \
 {NULL, 0}
@@ -48,7 +41,9 @@ typedef struct data
 	char **args;
 	int status;
 	int counter;
-	char** _environ;
+	char **tokens;
+	size_t len;
+	char **_environ;
 } data_shell;
 
 void prompt(void);
