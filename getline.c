@@ -1,8 +1,7 @@
 #include "shell.h"
 /**
  * _getline - gets reads an entire line from the stream
- * @line: input
- * @len: length
+ * @a: pointer to structure args
  *
  * Return: 0 on Success, -1 on error
  */

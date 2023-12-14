@@ -8,7 +8,8 @@ void prompt(void)
 {
 	args a = ARGS_INIT;
 	int status, i;
-	blt_in b[] = {{"cd", sh_cd}, {"help", sh_help}, {"exit", sh_exit}, {"env", _getenv}};
+	blt_in b[] = {{"cd", sh_cd}, {"help", sh_help},
+		{"exit", sh_exit}, {"env", _getenv}};
 
 	while (1)
 	{
@@ -17,6 +18,7 @@ void prompt(void)
 			continue;
 
 		int found = 0;
+
 		a.tokens = parser(&a);
 
 		for (i = 0; i < sizeof(b) / sizeof(b[0]); i++)
@@ -33,6 +35,7 @@ void prompt(void)
 			fork_exec(a.tokens);
 		}
 		int j;
+
 		for (j = 0; a.tokens[j] != NULL; j++)
 		{
 			free(a.tokens[j]);
