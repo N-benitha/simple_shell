@@ -32,7 +32,7 @@ typedef struct builtin_cmds
 {
 	char *str;
 	int (*builtin_fun)(args *);
-}blt_in;
+} blt_in;
 
 typedef struct data
 {
@@ -83,5 +83,5 @@ char *error_get_cd(data_shell *dat);
 char *error_not_found(data_shell *dat);
 char *error_exit_shell(data_shell *dat);
 char *aux_itoa(int n);
-
+int cmp_chars(char str[], const char *delim);
 #endif
