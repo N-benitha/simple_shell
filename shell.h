@@ -36,7 +36,7 @@ typedef struct builtin_cmds
 {
 	char *str;
 	int (*builtin_fun)(args *);
-}blt_in;
+} blt_in;
 
 typedef struct data
 {
@@ -98,5 +98,6 @@ int is_chain(data_shell *d, char *buf, size_t *p);
 void check_chain(data_shell *d, char *buf, size_t *p, size_t i, size_t len);
 int replace_vars(data_shell *d);
 int replace_string(char **old_str, char *new_str);
+int cmp_chars(char str[], const char *delim);
 
 #endif
