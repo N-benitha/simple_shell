@@ -35,7 +35,7 @@ extern char **environ;
 typedef struct builtin_cmds
 {
 	char *str;
-	int (*builtin_fun)(args *);
+	int (*builtin_fun)(data_shell *);
 } blt_in;
 
 typedef struct data
