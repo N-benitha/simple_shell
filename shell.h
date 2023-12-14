@@ -24,10 +24,6 @@
 
 extern char **environ;
 
-
-#define ARGS_INIT \
-{NULL, 0}
-
 typedef struct builtin_cmds
 {
 	char *str;
@@ -45,6 +41,9 @@ typedef struct data
 	size_t len;
 	char **_environ;
 } data_shell;
+
+#define ARGS_INIT \
+{NULL, NULL, NULL, 0, 0, NULL, 0, NULL}
 
 void prompt(void);
 int _getline(data_shell *a);
