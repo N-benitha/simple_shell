@@ -47,9 +47,8 @@ typedef struct data
 	char *input;
 	char **args;
 	int status;
-	int counter
-	char **_environ;
-	
+	int counter;
+	char** _environ;
 } data_shell;
 
 void prompt(void);
@@ -82,5 +81,12 @@ int set_env(data_shell *dat);
 int _delsetenv(data_shell *dat);
 char *strcat_cd(data_shell *dat, char *msg, char *error, char *ver_str);
 int get_len(int n);
+char *error_env(data_shell *dat);
+char *error_path_126(data_shell *dat);
+char *strcat_cd(data_shell *dat, char *msg, char *error, char *ver_str);
+char *error_get_cd(data_shell *dat);
+char *error_not_found(data_shell *dat);
+char *error_exit_shell(data_shell *dat);
+char *aux_itoa(int n);
 
 #endif

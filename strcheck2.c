@@ -35,7 +35,7 @@ break;
 /*Replacing delimiter for null char*/
 for (i = 0; delim[i]; i++)
 {
-if (*splitted == delm[i])
+if (*splitted == delim[i])
 {
 *splitted = '\0';
 if (splitted == str_start)

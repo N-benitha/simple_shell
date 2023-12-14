@@ -8,7 +8,7 @@
  * Return: error message.
  */
 
-char *error_env(data_shell *datash)
+char *error_env(data_shell *dat)
 {
 	int length;
 	char *error;
