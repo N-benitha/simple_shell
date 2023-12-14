@@ -84,19 +84,19 @@ int replace_vars(data_shell *d)
 		if (d->av[i][0] != '$' || !d->av[i][1])
 			continue;
 
-		if (!_strcmp(d->av[i], "$?"))
+		if (!str_cmp(d->av[i], "$?"))
 		{
 			replace_string(&(d->av[i]),
 				_strdup(convert_number(d->status, 10, 0)));
 			continue;
 		}
-		if (!_strcmp(d->av[i], "$$"))
+		if (!str_cmp(d->av[i], "$$"))
 		{
 			replace_string(&(d->av[i]),
 				_strdup(convert_number(getpid(), 10, 0)));
 			continue;
 		}
-		node = node_starts_with(d->environ, &d->av[i][1], '=');
+		node = node_starts_with(d->_environ, &d->av[i][1], '=');
 		if (node)
 		{
 			replace_string(&(d->av[i]),

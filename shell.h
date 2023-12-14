@@ -62,6 +62,8 @@ typedef struct liststr
 #define ARGS_INIT \
 {NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, 0}
 
+extern char **environ;
+
 void prompt(data_shell *a);
 int _getline(data_shell *a);
 void fork_exec(char **arr);
