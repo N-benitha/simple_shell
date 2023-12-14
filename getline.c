@@ -6,7 +6,7 @@
  *
  * Return: 0 on Success, -1 on error
  */
-int _getline(data_shell *a)
+int _getline(args *a)
 {
 	char *line = NULL;
 	size_t len = 0;
@@ -16,7 +16,7 @@ int _getline(data_shell *a)
 		fprintf(stderr, "Error writing to the line\n");
 		return (-1);
 	}
-	a->input = line;
+	a->line = line;
 	a->tokens = NULL;
 	a->len = len;
 	return (0);

@@ -9,7 +9,7 @@
  */
 int main(int ac, char **av)
 {
-	data_shell a[] = {ARGS_INIT};
+	args a[] = {ARGS_INIT};
 
 	prompt();
 	return (0);

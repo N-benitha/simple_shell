@@ -4,13 +4,11 @@
  *
  * Return: nothing
  */
-void prompt(data_shell *a)
+void prompt(void)
 {
-	data_shell a = ARGS_INIT;
+	args a = ARGS_INIT;
 	int status, i;
-	blt_in b[] = {{"cd", sh_cd}, {"help", sh_help},
-		{"exit", exit_shell}, {"setenv", _setsenv},
-		{"unsetenv", _delsetenv}, {NULL, NULL}};
+	blt_in b[] = {{"cd", sh_cd}, {"help", sh_help}, {"exit", sh_exit}, {"env", _getenv}};
 
 	while (1)
 	{
