@@ -151,3 +151,17 @@ int strtoi(char *s)
 	}
 	return (si * db);
 }
+/**
+ * starts_with - checks if b starts with a
+ * @a: string to search
+ * @b: the substring to find
+ *
+ * Return: address of next char of a or NULL
+ */
+char *starts_with(const char *a, const char *b)
+{
+	while (*b)
+		if (*b++ != *a++)
+			return (NULL);
+	return ((char *)a);
+}

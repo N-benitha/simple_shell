@@ -39,7 +39,6 @@ char **parser(data_shell *a)
 void fork_exec(char **arr)
 {
 	pid_t child_pid;
-	int status = 0;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -50,11 +49,21 @@ void fork_exec(char **arr)
 	if (child_pid == 0)
 	{
 		if (execve(arr[0], arr, NULL) == -1)
-			perror("Error");
+		{
+			if (errno == EACCES)
+				exit(126);
+			exit(1);
+		}
 	}
 	else
 	{
-		wait(&status);
+		wait(&(d->status));
+		if (WIFEXITED(d->status))
+		{
+			d->status = WEXITSTATUS(d->status);
+			if (d->status == 126)
+				print_error(d, "Permission denied\n");
+		}
 	}
 
 }

@@ -14,7 +14,7 @@ int sh_cd(data_shell *a)
 	else
 	{
 		if (chdir(a->tokens[1]) != 0)
-			perror("hsh");
+			error_get_cd(&a);
 	}
 	return (1);
 }

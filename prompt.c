@@ -4,13 +4,13 @@
  *
  * Return: nothing
  */
-void prompt(void)
+void prompt(data_shell *a)
 {
 	data_shell a = ARGS_INIT;
 	int status, i;
 	blt_in b[] = {{"cd", sh_cd}, {"help", sh_help},
 		{"exit", exit_shell}, {"setenv", _setsenv},
-		{"unsetenv", _delsetenv}};
+		{"unsetenv", _delsetenv}, {NULL, NULL}};
 
 	while (1)
 	{

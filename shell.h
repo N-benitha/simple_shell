@@ -21,6 +21,14 @@
 #define TOK_BUFSIZE 128
 #define TOK_DELIM " \t\r\n\a"
 
+/* for command chaining */
+#define CMD_NORM	0
+#define CMD_OR		1
+#define CMD_AND		2
+#define CMD_CHAIN	3
+
+#define CONVERT_LOWERCASE	1
+#define CONVERT_UNSIGNED	2
 
 extern char **environ;
 
@@ -40,12 +48,14 @@ typedef struct data
 	char **tokens;
 	size_t len;
 	char **_environ;
+	char **cmd_buf;
+	int cmd_buf_type;
 } data_shell;
 
 #define ARGS_INIT \
-{NULL, NULL, NULL, 0, 0, NULL, 0, NULL}
+{NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, 0}
 
-void prompt(void);
+void prompt(data_shell *a);
 int _getline(data_shell *a);
 void fork_exec(char **arr);
 char **parser(data_shell *a);
@@ -82,5 +92,11 @@ char *error_get_cd(data_shell *dat);
 char *error_not_found(data_shell *dat);
 char *error_exit_shell(data_shell *dat);
 char *aux_itoa(int n);
+char *convert_number(long int num, int base, int flags);
+char *starts_with(const char *a, const char *b);
+int is_chain(data_shell *d, char *buf, size_t *p);
+void check_chain(data_shell *d, char *buf, size_t *p, size_t i, size_t len);
+int replace_vars(data_shell *d);
+int replace_string(char **old_str, char *new_str);
 
 #endif
