@@ -36,9 +36,8 @@ char **parser(data_shell *a)
  *
  * Return: nothing
  */
-void fork_exec(char **arr)
+void fork_exec(char **arr, data_shell *a)
 {
-	data_shell *a;
 	pid_t child_pid;
 
 	child_pid = fork();
@@ -58,7 +57,7 @@ void fork_exec(char **arr)
 	}
 	else
 	{
-		wait(&(a->status));
+		waitpid(child_pid, &(a->status), 0);
 		if (WIFEXITED(a->status))
 		{
 			a->status = WEXITSTATUS(a->status);

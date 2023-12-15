@@ -6,26 +6,37 @@
  */
 void prompt(data_shell *a)
 {
-	const data_shell DATA_SHELL_INIT = {NULL, NULL, NULL,
-		0, 0, NULL, 0, NULL, NULL, 0};
 	int status, i;
 	blt_in b[] = {
 		{"cd", sh_cd},
 		{"help", sh_help},
 		{"exit", exit_shell},
-		{"setenv", _setsenv},
+		{"setenv", set_env},
 		{"unsetenv", _delsetenv}, 
 		{NULL, NULL}
 	};
 
 	while (1)
 	{
-		write(1, "$ ", 2);
+		write(STDOUT_FILENO, "$ ", 2);
 		if (_getline(a) == -1)
+		{
+			if (a->input != NULL)
+			{
+				free(a->input);
+				a->input = NULL;
+			}
 			continue;
+		}
 
 		int found = 0;
 		a->tokens = parser(a);
+		if (a->tokens[0] == 0)
+		{
+			free(a->input);
+			free(a->tokens);
+			continue;
+		}
 
 		for (i = 0; i < sizeof(b) / sizeof(b[0]); i++)
 		{
@@ -38,7 +49,7 @@ void prompt(data_shell *a)
 		}
 		if (!found)
 		{
-			fork_exec(a->tokens);
+			fork_exec(a->tokens, a);
 		}
 		int j;
 		for (j = 0; a->tokens[j] != NULL; j++)

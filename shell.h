@@ -44,6 +44,9 @@ typedef struct data
 	int cmd_buf_type;
 } data_shell;
 
+#define DATA_SHELL_INIT \
+{NULL, NULL, NULL, 0, 0, NULL, 0, NULL, NULL, 0}
+
 typedef struct builtin_cmds
 {
         char *str;
@@ -57,13 +60,11 @@ typedef struct liststr
 	struct liststr *next;
 } list_t;
 
-extern const data_shell DATA_SHELL_INIT;
-
 extern char **environ;
 
 void prompt(data_shell *a);
 int _getline(data_shell *a);
-void fork_exec(char **arr);
+void fork_exec(char **arr, data_shell *a);
 char **parser(data_shell *a);
 int sh_exit(data_shell *a);
 int sh_help(data_shell *a);

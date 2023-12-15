@@ -9,10 +9,8 @@
  */
 int main(int ac, char **av)
 {
-	data_shell DATA_SHELL_INIT = {NULL, NULL, NULL,
-		0, 0, NULL, 0, NULL, NULL, 0};
-
-
-	prompt(&DATA_SHELL_INIT);
+	data_shell a[] = { DATA_SHELL_INIT };
+	a->av = av;
+	prompt(a);
 	return (0);
 }

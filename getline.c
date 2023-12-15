@@ -16,6 +16,7 @@ int _getline(data_shell *a)
 		fprintf(stderr, "Error writing to the line\n");
 		return (-1);
 	}
+	free(a->input);
 	a->input = line;
 	a->tokens = NULL;
 	a->len = len;
