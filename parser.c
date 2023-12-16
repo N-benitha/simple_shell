@@ -1,69 +1,86 @@
 #include "shell.h"
+
 /**
- * parser - divides up the line inputed into arguments
- * @a: pointer to structure args
+ * is_cmd - determines if a file is an executable command
+ * @info: the info struct
+ * @path: path to the file
  *
- * Return: address of pointer to character
+ * Return: 1 if true, 0 otherwise
  */
-char **parser(data_shell *a)
+int is_cmd(info_t *info, char *path)
 {
-	char *token;
-	char **arr;
-	int i = 0;
+	struct stat st;
 
-	arr = malloc(sizeof(char *) * 1024);
-	if (!arr)
+	(void)info;
+	if (!path || stat(path, &st))
+		return (0);
+
+	if (st.st_mode & S_IFREG)
 	{
-		perror("Memory allocation error");
-		exit(EXIT_FAILURE);
+		return (1);
 	}
+	return (0);
+}
 
-	token = strtok(a->input, " \t\n");
-	while (token)
+/**
+ * dup_chars - duplicates characters
+ * @pathstr: the PATH string
+ * @start: starting index
+ * @stop: stopping index
+ *
+ * Return: pointer to new buffer
+ */
+char *dup_chars(char *pathstr, int start, int stop)
+{
+	static char buf[1024];
+	int i = 0, k = 0;
+
+	for (k = 0, i = start; i < stop; i++)
+		if (pathstr[i] != ':')
+			buf[k++] = pathstr[i];
+	buf[k] = 0;
+	return (buf);
+}
+
+/**
+ * find_path - finds this cmd in the PATH string
+ * @info: the info struct
+ * @pathstr: the PATH string
+ * @cmd: the cmd to find
+ *
+ * Return: full path of cmd if found or NULL
+ */
+char *find_path(info_t *info, char *pathstr, char *cmd)
+{
+	int i = 0, curr_pos = 0;
+	char *path;
+
+	if (!pathstr)
+		return (NULL);
+	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
 	{
-		arr[i] = strdup(token);
-		token = strtok(NULL, " \t\n");
+		if (is_cmd(info, cmd))
+			return (cmd);
+	}
+	while (1)
+	{
+		if (!pathstr[i] || pathstr[i] == ':')
+		{
+			path = dup_chars(pathstr, curr_pos, i);
+			if (!*path)
+				_strcat(path, cmd);
+			else
+			{
+				_strcat(path, "/");
+				_strcat(path, cmd);
+			}
+			if (is_cmd(info, path))
+				return (path);
+			if (!pathstr[i])
+				break;
+			curr_pos = i;
+		}
 		i++;
 	}
-	arr[i] = NULL;
-	a->tokens = arr;
-
-	return (arr);
-}
-/**
- * fork_exec - executes a program referred to by the pathname
- * @arr: address of pointer to char
- *
- * Return: nothing
- */
-void fork_exec(char **arr, data_shell *a)
-{
-	pid_t child_pid;
-
-	child_pid = fork();
-	if (child_pid == -1)
-	{
-		perror("Unsuccesful\n");
-		return;
-	}
-	if (child_pid == 0)
-	{
-		if (execve(arr[0], arr, NULL) == -1)
-		{
-			if (errno == EACCES)
-				exit(126);
-			exit(1);
-		}
-	}
-	else
-	{
-		waitpid(child_pid, &(a->status), 0);
-		if (WIFEXITED(a->status))
-		{
-			a->status = WEXITSTATUS(a->status);
-			if (a->status == 126)
-				get_error(a, 126);
-		}
-	}
-
+	return (NULL);
 }
